@@ -8,6 +8,11 @@
   ],
   "routes": [
     {
+      "src": "/",
+      "methods": ["GET"],
+      "dest": "/api/download/:requestId"
+    },
+    {
       "src": "/api/upload",
       "methods": ["POST"],
       "dest": "/api/upload"
