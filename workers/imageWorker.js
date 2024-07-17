@@ -13,7 +13,7 @@ const saveImage = async (buffer, fileName) => {
 };
 
 exports.processImages = async (requestId, imageUrls) => {
-  const request = await Request.findOne({ requestId });
+  const request = await Request.findOne({ requestId }, { timeout: 60000 });
   if (!request) {
     return;
   }

@@ -30,7 +30,7 @@ exports.uploadCSV = async (req, res) => {
 exports.checkStatus = async (req, res) => {
   const { requestId } = req.params;
 
-  const request = await Request.findOne({ requestId });
+  const request = await Request.findOne({ requestId }, { timeout: 60000 });
 
   if (!request) {
     return res.status(404).send("Request not found");
@@ -43,7 +43,7 @@ exports.checkStatus = async (req, res) => {
 
 exports.downloadCSV = async (req, res) => {
   const { requestId } = req.params;
-  const request = await Request.findOne({ requestId });
+  const request = await Request.findOne({ requestId }, { timeout: 60000 });
 
   if (!request || !request.csvPath)
     return res.status(404).send("CSV not found");
