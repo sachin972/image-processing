@@ -2,30 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "app.js",
+      "src": "./app.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/",
-      "methods": ["GET"],
-      "dest": "/api/download/:requestId"
-    },
-    {
-      "src": "/api/upload",
-      "methods": ["POST"],
-      "dest": "/api/upload"
-    },
-    {
-      "src": "/api/status/:requestId",
-      "methods": ["GET"],
-      "dest": "/api/status/:requestId"
-    },
-    {
-      "src": "/api/download/:requestId",
-      "methods": ["GET"],
-      "dest": "/api/download/:requestId"
+      "src": "/(.*)",
+      "dest": "/"
     }
   ]
 }
