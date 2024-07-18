@@ -30,7 +30,7 @@ const saveImage = async (imageUrl) => {
 
     await sharp(imageBuffer).jpeg({ quality: 50 }).toFile(outputPath);
 
-    return `${process.env.URL}/processed_images/${path.basename(imageUrl)}`;
+    return `${process.env.URL}/processed_images/${outputFilename}`;
   } catch (error) {
     console.error("Error processing image:", error.message);
     throw error;
