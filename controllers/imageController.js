@@ -1,9 +1,11 @@
 const fs = require("fs");
-const csv = require("csv-parser");
+// const csv = require("csv-parser");
 const mongoose = require("mongoose");
 const axios = require("axios");
 const { saveImage } = require("../services/imageProcessing");
 const Request = require("../models/Request");
+const csvWriter = require("csv-writer");
+const { stringify } = require("csv-stringify");
 
 async function handleCSVUpload(req, res) {
   console.log("File received:", req.file); // Debug log
@@ -117,27 +119,46 @@ async function downloadCSV(req, res) {
   }
 
   const csvData = [];
+  csvData.push([
+    "S. No.",
+    "Product Name",
+    "Input Image Urls",
+    "Output Image Urls",
+  ]);
   request.processedData.forEach((item, index) => {
-    csvData.push({
-      "S. No.": index + 1,
-      "Product Name": item.product,
-      "Input Image Urls": item.inputUrls.join(","),
-      "Output Image Urls": item.outputUrls.join(","),
-    });
+    csvData.push([
+      index + 1,
+      item.product,
+      item.inputUrls.join(","),
+      item.outputUrls.join(","),
+    ]);
+  });
+  //   const file = new File([csvData], "data.csv", { type: "text/csv" });
+  //   console.log(file);
+
+  stringify(csvData, (err, csvContent) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send("Error generating CSV");
+    } else {
+      // Set the appropriate headers for the CSV file
+      res.setHeader("Content-Disposition", "attachment; filename=example.csv");
+      res.setHeader("Content-Type", "text/csv");
+
+      // Send the CSV content to the client
+      res.send(csvContent);
+    }
   });
 
-  const csvString = csvData
-    .map(
-      (row) =>
-        `${row["S. No."]},${row["Product Name"]},${row["Input Image Urls"]},${row["Output Image Urls"]}`
-    )
-    .join("\n");
-  res.setHeader("Content-Type", "text/csv");
-  res.setHeader(
-    "Content-Disposition",
-    `attachment; filename=request-${requestId}.csv`
-  );
-  res.send(csvString);
+  //   const csvString = csvData
+  //     .map(
+  //       (row) =>
+  //         `${row["S. No."]},${row["Product Name"]},${row["Input Image Urls"]},${row["Output Image Urls"]}`
+  //     )
+  //     .join("\n");
+  //   res.setHeader("Content-Type", "text/csv");
+  //   res.setHeader("Content-Disposition", `attachment; filename=data.csv`);
+  //   res.send(file);
 }
 
 module.exports = { handleCSVUpload, checkProcessingStatus, downloadCSV };
