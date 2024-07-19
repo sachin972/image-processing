@@ -67,6 +67,14 @@ This API allows users to upload a CSV file containing product information and im
 
 The `storageService.js` file contains functions for uploading files to the Appwrite storage.
 
+### `services/imageProcessing.js`
+
+The `imageProcessing.js` file contains functions for processing images, saving images, and uploading images to storage.
+
+### `routes/index.js`
+
+The `index.js` file defines the main routes for handling CSV file uploads, processing status checks, and CSV file downloads.
+
 ## Contributing
 
 Contributions are welcome! If you find any issues or have suggestions for improvement, please open an issue or submit a pull request.
