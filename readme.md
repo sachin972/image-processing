@@ -44,16 +44,28 @@ This API allows users to upload a CSV file containing product information and im
 
 - `express`: For creating the server and defining routes.
 - `multer`: For handling file uploads.
-- `csv-parser`: For parsing the uploaded CSV file.
-- `csv-writer`: For generating the processed CSV file.
+- `axios`: For making HTTP requests.
+- `sharp`: For image processing.
+- `uuid`: For generating unique identifiers.
+- `fs`: For file system operations.
+- `appwrite`: For interacting with the Appwrite API.
+- `blob-polyfill`: For handling Blob objects.
+- `file-type`: For determining file types.
+- `node-appwrite/file`: For interacting with the Appwrite File API.
 - Other dependencies as per your `package.json`.
 
 ## Additional Notes
 
 - Ensure proper error handling and security measures are implemented.
-- The API uses MongoDB as the database to store request information.
+- The API utilizes MongoDB to store request information.
 - The processed images are saved in the `processed_images` directory.
-- The API uses the Appwrite API for image processing.
+- The API integrates with the Appwrite API for image processing.
+
+## Code Context
+
+### `services/storageService.js`
+
+The `storageService.js` file contains functions for uploading files to the Appwrite storage.
 
 ## Contributing
 
