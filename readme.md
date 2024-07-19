@@ -77,6 +77,32 @@ The `Request` schema is used to store information about each uploaded request in
 
 ## Code Context
 
+## Controllers
+
+The API utilizes the following controller files:
+
+### `imageController.js`
+
+The `imageController.js` file contains the controller functions for handling the routes in the API.
+
+### `handleCSVUpload(req, res)`
+
+- **Description**: Handles the upload of a CSV file for processing.
+- **Request**: `POST` request with a file attached to the `file` field.
+- **Response**: JSON object containing the request ID.
+
+### `checkProcessingStatus(req, res)`
+
+- **Description**: Retrieves the processing status of a request based on the `requestId` parameter.
+- **Request**: `GET` request with the `requestId` parameter.
+- **Response**: JSON object containing the request status and data.
+
+### `downloadCSV(req, res)`
+
+- **Description**: Downloads a CSV file containing the processed data based on the `requestId` parameter.
+- **Request**: `GET` request with the `requestId` parameter.
+- **Response**: CSV file containing the processed data.
+
 ### `services/storageService.js`
 
 The `storageService.js` file contains functions for uploading files to the Appwrite storage.
