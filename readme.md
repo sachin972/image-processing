@@ -2,6 +2,9 @@
 
 This API allows users to upload a CSV file containing product information and image URLs. The API processes each image asynchronously and saves the output images in a appwrite bucket. The API also provides endpoints to check the processing status and download the processed CSV file.
 
+## Link to API Results:
+
+**https://api.postman.com/collections/18470794-cf0b2a9f-302c-4f10-b2d5-4851c1866f1c?access_key=PMAT-01J353ZDGY8FECB1M9BHDYV3P0**
 
 ## Database Schema
 
