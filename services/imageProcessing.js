@@ -3,6 +3,8 @@ const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
 const { v4: uuidv4 } = require("uuid");
+const { uploadFile } = require("./storageService");
+// const storageService = require("./storageService.ts");
 
 const saveImage = async (imageUrl) => {
   try {
@@ -30,7 +32,11 @@ const saveImage = async (imageUrl) => {
 
     await sharp(imageBuffer).jpeg({ quality: 50 }).toFile(outputPath);
 
-    return `${process.env.URL}/processed_images/${outputFilename}`;
+    // await addFile(imageBuffer);
+    // storageService.addFile(imageBuffer);
+    const fileData = await uploadFile(imageBuffer, outputFilename);
+
+    return `https://cloud.appwrite.io/v1/storage/buckets/${fileData.bucketId}/files/${fileData.$id}/preview?project=6699238e000c10852958`;
   } catch (error) {
     console.error("Error processing image:", error.message);
     throw error;
